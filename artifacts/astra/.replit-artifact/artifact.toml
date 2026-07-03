@@ -1,0 +1,27 @@
+kind = "mobile"
+previewPath = "/"
+title = "Astra"
+version = "1.0.0"
+id = "artifacts/astra"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+ensurePreviewReachable = "/status"
+name = "expo"
+paths = [ "/" ]
+localPort = 26055
+
+[services.development]
+run = "pnpm --filter @workspace/astra run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/astra", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/astra", "run", "serve" ]
+
+[services.env]
+PORT = "26055"
+BASE_PATH = "/"
