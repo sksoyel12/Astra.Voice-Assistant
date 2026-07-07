@@ -1,15 +1,16 @@
-# [Project name]
+# Astra
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Astra is a voice-enabled AI assistant app (React Native/Expo) with Google Gemini, multi-language support (English, Hindi, Bengali), and features like song ID, movie lookup, and device controls.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- **API server**: `pnpm --filter @workspace/api-server run dev` — starts on port 8080 (workflow: `artifacts/api-server: API Server`). Healthy when logs show `Server listening`.
+- **Expo app**: `pnpm --filter @workspace/astra run dev` — starts Expo dev server (workflow: `artifacts/astra: expo`).
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Required env: `DATABASE_URL` — Postgres connection string (Replit-managed, always set)
 
 ## Stack
 
