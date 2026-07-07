@@ -11,6 +11,18 @@ Astra is a voice-enabled AI assistant app (React Native/Expo) with Google Gemini
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string (Replit-managed, always set)
+- Required env: `PORT=8080` — set as Replit shared env var; API server binds to this port
+
+## Health check
+
+Once the API Server workflow is running, verify with:
+
+```
+curl http://localhost:8080/api/healthz
+# → {"status":"ok"}
+```
+
+DB connectivity is confirmed when `pnpm --filter @workspace/db run push` reports `No changes detected`.
 
 ## Stack
 
