@@ -197,22 +197,31 @@ const styles = StyleSheet.create({
     paddingLeft: 56,
   },
   userChip: {
-    backgroundColor: "#F0F4FF",
+    backgroundColor: "#EDE9FF",
     borderRadius:    20,
     paddingHorizontal: 16,
-    paddingVertical:   10,
+    paddingVertical:   11,
     maxWidth:          "92%",
+    shadowColor:       "#7C3AED",
+    shadowOffset:      { width: 0, height: 2 },
+    shadowOpacity:     0.08,
+    shadowRadius:      8,
+    elevation:         2,
   },
   userText: {
     fontSize:   15,
-    color:      "#1a1a1a",
+    color:      "#1E0B4B",
     fontFamily: "Inter_400Regular",
-    lineHeight: 21,
+    lineHeight: 22,
   },
 
-  // Astra block (full width, no bg)
+  // Astra block (full width, left accent)
   astraBlock: {
-    paddingRight: 8,
+    paddingRight:  8,
+    paddingLeft:   12,
+    borderLeftWidth: 2,
+    borderLeftColor: "#DDD6FE",
+    marginLeft:    2,
   },
   astraNameRow: {
     flexDirection: "row",
@@ -222,34 +231,35 @@ const styles = StyleSheet.create({
   },
   astraName: {
     fontSize:   13,
-    color:      "#444",
+    color:      "#6D28D9",
     fontFamily: "Inter_600SemiBold",
   },
   astraTime: {
     fontSize:   11,
-    color:      "#aaa",
+    color:      "#C4B5FD",
     fontFamily: "Inter_400Regular",
     marginLeft: "auto",
   },
   astraText: {
     fontSize:   15,
-    color:      "#1a1a1a",
+    color:      "#1E0B4B",
     fontFamily: "Inter_400Regular",
-    lineHeight: 23,
+    lineHeight: 24,
     marginBottom: 10,
   },
-  textError:   { color: "#EA4335" },
-  textWarning: { color: "#FBBC04" },
+  textError:   { color: "#EF4444" },
+  textWarning: { color: "#F59E0B" },
 
   // Action row
   actionRow: {
     flexDirection: "row",
     alignItems:    "center",
-    gap:           4,
+    gap:           2,
   },
   actionBtn: {
-    padding: 6,
-    borderRadius: 8,
+    padding:      7,
+    borderRadius: 10,
+    backgroundColor: "#F5F3FF",
   },
   actionBtnRight: { marginLeft: "auto" },
 
@@ -258,12 +268,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems:    "center",
     justifyContent: "center",
-    gap:           5,
-    paddingVertical: 12,
+    gap:           6,
+    paddingVertical: 14,
+    backgroundColor: "#F5F3FF",
+    borderRadius: 12,
+    marginHorizontal: 8,
+    marginBottom: 4,
   },
   clearText: {
     fontSize:   12,
-    color:      "#aaa",
+    color:      "#A78BFA",
     fontFamily: "Inter_400Regular",
   },
 });

@@ -71,19 +71,24 @@ const chipStyles = StyleSheet.create({
     flexDirection:  "row",
     alignItems:     "center",
     justifyContent: "center",
-    gap:            5,
-    marginBottom:   6,
+    gap:            6,
+    marginBottom:   8,
+    backgroundColor: "#F5F0FF",
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 20,
+    alignSelf: "center",
   },
   dot: {
     width:           6,
     height:          6,
     borderRadius:    3,
-    backgroundColor: "#4285F4",
+    backgroundColor: "#7C3AED",
   },
   text: {
     fontSize:   11,
-    color:      "#4285F4",
-    fontFamily: "Inter_400Regular",
+    color:      "#7C3AED",
+    fontFamily: "Inter_600SemiBold",
     letterSpacing: 0.2,
   },
 });
@@ -195,10 +200,10 @@ export default function AstraScreen() {
 
   return (
     <View style={styles.root}>
-      {/* Background gradient: white → very light blue */}
+      {/* Background gradient: soft lavender → white → sky */}
       <LinearGradient
-        colors={["#FFFFFF", "#EAF2FF"]}
-        locations={[0.55, 1.0]}
+        colors={["#F5F0FF", "#FFFFFF", "#EDF4FF"]}
+        locations={[0, 0.45, 1.0]}
         style={StyleSheet.absoluteFillObject}
         pointerEvents="none"
       />
@@ -216,7 +221,7 @@ export default function AstraScreen() {
           style={styles.headerBtn}
           hitSlop={10}
         >
-          <Ionicons name="menu" size={24} color="#444" />
+          <Ionicons name="menu" size={22} color="#6D28D9" />
         </TouchableOpacity>
 
         {/* Title */}
@@ -232,7 +237,7 @@ export default function AstraScreen() {
             style={styles.headerBtn}
             hitSlop={10}
           >
-            <Ionicons name="create-outline" size={22} color="#444" />
+            <Ionicons name="create-outline" size={20} color="#6D28D9" />
           </TouchableOpacity>
 
           {/* User avatar — opens Profile modal */}
@@ -437,44 +442,55 @@ const styles = StyleSheet.create({
   header: {
     flexDirection:  "row",
     alignItems:     "center",
-    paddingHorizontal: 12,
-    paddingBottom:  12,
+    paddingHorizontal: 16,
+    paddingBottom:  14,
     backgroundColor: "transparent",
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0EBFF",
   },
-  headerBtn: { padding: 6 },
+  headerBtn: {
+    padding: 8,
+    borderRadius: 12,
+    backgroundColor: "#F8F5FF",
+  },
   headerTitleArea: {
     flex:         1,
     flexDirection: "row",
     alignItems:    "baseline",
     gap:           5,
-    paddingLeft:   6,
+    paddingLeft:   10,
   },
   headerTitle: {
-    fontSize:    18,
+    fontSize:    20,
     fontFamily:  "Inter_700Bold",
-    color:       "#1a1a1a",
-    letterSpacing: -0.2,
+    color:       "#3B1F8C",
+    letterSpacing: -0.5,
   },
   headerModel: {
     fontSize:   13,
-    color:      "#5f6368",
+    color:      "#9B8DC0",
     fontFamily: "Inter_400Regular",
   },
-  headerRight: { flexDirection: "row", alignItems: "center", gap: 2 },
-  avatarBtn: { padding: 4 },
+  headerRight: { flexDirection: "row", alignItems: "center", gap: 8 },
+  avatarBtn: { padding: 2 },
   avatarCircle: {
-    width:           30,
-    height:          30,
-    borderRadius:    15,
-    backgroundColor: "#4A3F8F",
+    width:           34,
+    height:          34,
+    borderRadius:    17,
+    backgroundColor: "#6D28D9",
     alignItems:      "center",
     justifyContent:  "center",
     borderWidth:     2,
-    borderColor:     "#7B68D9",
+    borderColor:     "#A78BFA",
+    shadowColor:     "#7C3AED",
+    shadowOffset:    { width: 0, height: 2 },
+    shadowOpacity:   0.4,
+    shadowRadius:    6,
+    elevation:       4,
   },
   avatarInitials: {
     color:      "#fff",
-    fontSize:   11,
+    fontSize:   12,
     fontFamily: "Inter_700Bold",
     letterSpacing: 0.3,
   },
@@ -482,11 +498,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical:   4,
     borderRadius:      8,
-    backgroundColor:   "#F0F4FF",
+    backgroundColor:   "#F0EBFF",
   },
   langText: {
     fontSize:   11,
-    color:      "#4285F4",
+    color:      "#7C3AED",
     fontFamily: "Inter_700Bold",
     letterSpacing: 0.8,
   },
@@ -496,19 +512,20 @@ const styles = StyleSheet.create({
     flex:           1,
     alignItems:     "center",
     justifyContent: "center",
-    gap:            22,
+    gap:            28,
     paddingBottom:  60,
   },
   homeHint: {
-    fontSize:   26,
-    fontFamily: "Inter_400Regular",
-    color:      "#1a1a1a",
-    textAlign:  "center",
-    letterSpacing: -0.3,
+    fontSize:      28,
+    fontFamily:    "Inter_700Bold",
+    color:         "#1E0B4B",
+    textAlign:     "center",
+    letterSpacing: -0.5,
   },
   homeHintActive: {
     fontSize:   18,
-    color:      "#5f6368",
+    fontFamily: "Inter_400Regular",
+    color:      "#9B8DC0",
   },
 
   // ── Chat area ──
@@ -543,17 +560,17 @@ const styles = StyleSheet.create({
     flexDirection:   "row",
     alignItems:      "center",
     backgroundColor: "#FFFFFF",
-    borderRadius:    30,
-    paddingLeft:     12,
-    paddingRight:    4,   // tight right so circle button sits flush
-    paddingVertical: 4,
-    shadowColor:     "#000",
-    shadowOffset:    { width: 0, height: 2 },
-    shadowOpacity:   0.10,
-    shadowRadius:    12,
-    elevation:       6,
-    borderWidth:     1,
-    borderColor:     "#F0F0F0",
+    borderRadius:    32,
+    paddingLeft:     14,
+    paddingRight:    5,
+    paddingVertical: 5,
+    shadowColor:     "#6D28D9",
+    shadowOffset:    { width: 0, height: 4 },
+    shadowOpacity:   0.12,
+    shadowRadius:    16,
+    elevation:       8,
+    borderWidth:     1.5,
+    borderColor:     "#EDE9FF",
     gap:             6,
   },
   pillBtn: {
@@ -564,16 +581,15 @@ const styles = StyleSheet.create({
     borderRadius:   20,
     flexShrink:     0,
   },
-  pillBtnActive: { backgroundColor: "#EAF2FF" },
+  pillBtnActive: { backgroundColor: "#EDE9FF" },
   pillInput: {
     flex:       1,
     fontSize:   16,
     fontFamily: "Inter_400Regular",
-    color:      "#1a1a1a",
+    color:      "#1E0B4B",
     paddingVertical: Platform.OS === "ios" ? 10 : 6,
     paddingHorizontal: 4,
     minHeight:  40,
-    // Remove browser focus outline on web (causes the inner black box)
     ...(Platform.OS === "web" ? { outlineWidth: 0, outlineStyle: "none" } : {}),
   },
   // ── Right-side circular buttons — contained inside the pill ──
@@ -583,8 +599,12 @@ const styles = StyleSheet.create({
     alignItems:      "center",
     justifyContent:  "center",
     borderRadius:    20,
-    backgroundColor: "#4285F4",
+    backgroundColor: "#7C3AED",
     flexShrink:      0,
+    shadowColor:     "#7C3AED",
+    shadowOffset:    { width: 0, height: 2 },
+    shadowOpacity:   0.4,
+    shadowRadius:    6,
   },
   waveCircleBtn: {
     width:           40,
@@ -592,11 +612,15 @@ const styles = StyleSheet.create({
     alignItems:      "center",
     justifyContent:  "center",
     borderRadius:    20,
-    backgroundColor: "#4285F4",
+    backgroundColor: "#7C3AED",
     flexShrink:      0,
+    shadowColor:     "#7C3AED",
+    shadowOffset:    { width: 0, height: 2 },
+    shadowOpacity:   0.4,
+    shadowRadius:    6,
   },
   waveCircleBtnActive: {
-    backgroundColor: "#1a6ae0",
+    backgroundColor: "#5B21B6",
   },
   // Static 3-bar waveform icon (idle state)
   staticWaveRow: {
@@ -625,10 +649,10 @@ const styles = StyleSheet.create({
 
   disclaimer: {
     fontSize:   10,
-    color:      "#bbb",
+    color:      "#C4B5FD",
     fontFamily: "Inter_400Regular",
     textAlign:  "center",
-    marginTop:  6,
-    letterSpacing: 0.2,
+    marginTop:  8,
+    letterSpacing: 0.3,
   },
 });

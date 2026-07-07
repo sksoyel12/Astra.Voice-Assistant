@@ -185,25 +185,69 @@ function ClerkSignInScreen() {
   );
 }
 
+// ── Background star particles ─────────────────────────────────────────────────
+function StarParticles() {
+  const stars = [
+    { x: "12%", y: "8%",  r: 1.5, op: 0.6 },
+    { x: "88%", y: "12%", r: 1,   op: 0.4 },
+    { x: "5%",  y: "35%", r: 1,   op: 0.3 },
+    { x: "92%", y: "40%", r: 1.5, op: 0.5 },
+    { x: "18%", y: "62%", r: 1,   op: 0.35 },
+    { x: "80%", y: "70%", r: 1.5, op: 0.4 },
+    { x: "45%", y: "6%",  r: 1,   op: 0.5 },
+    { x: "70%", y: "88%", r: 1,   op: 0.3 },
+    { x: "30%", y: "92%", r: 1.5, op: 0.4 },
+    { x: "95%", y: "85%", r: 1,   op: 0.35 },
+  ];
+  return (
+    <Svg style={StyleSheet.absoluteFillObject} width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+      {stars.map((st, i) => (
+        <Circle key={i} cx={st.x} cy={st.y} r={st.r} fill="#FFFFFF" opacity={st.op} />
+      ))}
+    </Svg>
+  );
+}
+
 // ── Shared layout wrapper ─────────────────────────────────────────────────────
 
 function SignInLayout({ insets, children }: { insets: { top: number; bottom: number }; children: React.ReactNode }) {
   return (
     <View style={[s.root, { paddingTop: insets.top + 20, paddingBottom: insets.bottom + 24 }]}>
+      {/* Subtle radial glow at top */}
+      <Svg style={s.glowBg} width="100%" height="60%" viewBox="0 0 100 60" preserveAspectRatio="none">
+        <Defs>
+          <RadialGradient id="bgGlow" cx="50%" cy="0%" r="80%">
+            <Stop offset="0%"   stopColor="#4C1D95" stopOpacity={0.45} />
+            <Stop offset="100%" stopColor="#060612" stopOpacity={0} />
+          </RadialGradient>
+        </Defs>
+        <Ellipse cx={50} cy={0} rx={60} ry={50} fill="url(#bgGlow)" />
+      </Svg>
+
+      <StarParticles />
+
       <View style={s.brandArea}>
-        <AstraLogo size={96} />
+        <View style={s.logoGlow}>
+          <AstraLogo size={100} />
+        </View>
         <Text style={s.appName}>Astra</Text>
         <Text style={s.tagline}>Your intelligent voice assistant</Text>
       </View>
+
       <View style={s.card}>
+        <View style={s.cardTopAccent} />
         <Text style={s.cardTitle}>Get started</Text>
         <Text style={s.cardSubtitle}>
           Sign in to save your conversations{"\n"}and access Astra across devices
         </Text>
         {children}
       </View>
+
       <Text style={s.legalText}>
-        By continuing, you agree to our Terms of Service{"\n"}and Privacy Policy
+        By continuing, you agree to our{" "}
+        <Text style={s.legalLink}>Terms of Service</Text>
+        {"\n"}and{" "}
+        <Text style={s.legalLink}>Privacy Policy</Text>
       </Text>
     </View>
   );
@@ -218,6 +262,15 @@ const s = StyleSheet.create({
     alignItems:      "center",
     justifyContent:  "space-between",
     paddingHorizontal: 24,
+    overflow:        "hidden",
+  },
+
+  // Background elements
+  glowBg: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
   },
 
   // Brand
@@ -225,46 +278,69 @@ const s = StyleSheet.create({
     flex:           1,
     alignItems:     "center",
     justifyContent: "center",
-    gap:            14,
-    paddingBottom:  20,
+    gap:            16,
+    paddingBottom:  24,
+  },
+  logoGlow: {
+    shadowColor:   "#A855F7",
+    shadowOffset:  { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius:  30,
+    elevation:     20,
   },
   appName: {
-    fontSize:      40,
+    fontSize:      44,
     fontFamily:    "Inter_700Bold",
     color:         "#FFFFFF",
-    letterSpacing: -1,
+    letterSpacing: -1.5,
     marginTop:     4,
   },
   tagline: {
     fontSize:      15,
     fontFamily:    "Inter_400Regular",
-    color:         "#666",
-    letterSpacing: 0.2,
+    color:         "#6B5A9E",
+    letterSpacing: 0.3,
   },
 
   // Sign-in card
   card: {
     width:           "100%",
-    backgroundColor: "#0F0A2A",
-    borderRadius:    24,
+    backgroundColor: "#0D0820",
+    borderRadius:    28,
     padding:         28,
     alignItems:      "center",
     gap:             14,
-    borderWidth:     1,
-    borderColor:     "#1E1145",
+    borderWidth:     1.5,
+    borderColor:     "#2D1B69",
+    shadowColor:     "#7C3AED",
+    shadowOffset:    { width: 0, height: 8 },
+    shadowOpacity:   0.25,
+    shadowRadius:    24,
+    elevation:       12,
+    overflow:        "hidden",
+  },
+  cardTopAccent: {
+    position:        "absolute",
+    top:             0,
+    left:            "20%",
+    right:           "20%",
+    height:          2,
+    backgroundColor: "#7C3AED",
+    borderRadius:    1,
   },
   cardTitle: {
-    fontSize:      22,
+    fontSize:      24,
     fontFamily:    "Inter_700Bold",
     color:         "#FFFFFF",
-    letterSpacing: -0.3,
+    letterSpacing: -0.5,
+    marginTop:     8,
   },
   cardSubtitle: {
     fontSize:      14,
     fontFamily:    "Inter_400Regular",
-    color:         "#888",
+    color:         "#6B5A9E",
     textAlign:     "center",
-    lineHeight:    20,
+    lineHeight:    22,
   },
 
   // Google button
@@ -274,16 +350,16 @@ const s = StyleSheet.create({
     justifyContent:    "center",
     gap:               12,
     backgroundColor:   "#FFFFFF",
-    borderRadius:      14,
-    paddingVertical:   15,
+    borderRadius:      16,
+    paddingVertical:   16,
     paddingHorizontal: 24,
     width:             "100%",
-    marginTop:         6,
+    marginTop:         8,
     shadowColor:       "#000",
-    shadowOffset:      { width: 0, height: 2 },
-    shadowOpacity:     0.25,
-    shadowRadius:      8,
-    elevation:         4,
+    shadowOffset:      { width: 0, height: 4 },
+    shadowOpacity:     0.3,
+    shadowRadius:      12,
+    elevation:         6,
   },
   googleBtnDisabled: { opacity: 0.7 },
   googleBtnText: {
@@ -295,16 +371,16 @@ const s = StyleSheet.create({
 
   errorText: {
     fontSize:   13,
-    color:      "#EA4335",
+    color:      "#F87171",
     fontFamily: "Inter_400Regular",
     textAlign:  "center",
   },
 
-  skipBtn: { paddingVertical: 8, paddingHorizontal: 16 },
+  skipBtn: { paddingVertical: 10, paddingHorizontal: 16 },
   skipText: {
     fontSize:      13,
     fontFamily:    "Inter_400Regular",
-    color:         "#555",
+    color:         "#4B3A7A",
     textDecorationLine: "underline",
   },
 
@@ -312,9 +388,13 @@ const s = StyleSheet.create({
   legalText: {
     fontSize:      11,
     fontFamily:    "Inter_400Regular",
-    color:         "#333",
+    color:         "#2D1F4E",
     textAlign:     "center",
-    lineHeight:    16,
+    lineHeight:    18,
     marginTop:     20,
+  },
+  legalLink: {
+    color:             "#6D28D9",
+    textDecorationLine: "underline",
   },
 });

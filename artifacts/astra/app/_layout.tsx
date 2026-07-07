@@ -5,7 +5,7 @@ import {
   Inter_700Bold,
   useFonts,
 } from "@expo-google-fonts/inter";
-import { ClerkLoaded, ClerkProvider } from "@clerk/expo";
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
@@ -76,6 +76,18 @@ const s = StyleSheet.create({
     zIndex: 9999,
   },
 });
+
+// ── Clerk timeout fallback — renders app if Clerk doesn't load in 4s ──────────
+
+function ClerkFallback() {
+  const [timedOut, setTimedOut] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setTimedOut(true), 4000);
+    return () => clearTimeout(t);
+  }, []);
+  if (!timedOut) return null;
+  return <AppContent />;
+}
 
 // ── App content (providers + nav) ─────────────────────────────────────────────
 
@@ -153,6 +165,10 @@ export default function RootLayout() {
             tokenCache={tokenCache}
             proxyUrl={clerkProxyUrl}
           >
+            {/* ClerkLoading: render app immediately if Clerk takes >4s */}
+            <ClerkLoading>
+              <ClerkFallback />
+            </ClerkLoading>
             <ClerkLoaded>
               <AppContent />
             </ClerkLoaded>
